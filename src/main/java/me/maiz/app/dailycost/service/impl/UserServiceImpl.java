@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String username, String password) {
+        //TODO 加密密码
         //通过用户名和密码查询用户，查不到 则不存在
         User user = userDAO.findByUsernameAndPassword(username,password);
         if(user==null){
