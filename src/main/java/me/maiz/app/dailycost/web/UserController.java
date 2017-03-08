@@ -34,34 +34,27 @@ public class UserController extends BaseController {
         return "reg";
     }
 
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login() {
+        return "index";
+    }
+
+
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(HttpServletRequest request, LoginForm form,ModelMap modelMap) {
-        try {
+    public String login(HttpServletRequest request, LoginForm form, ModelMap modelMap) {
 
-            //验证表单
-            form.validate();
+        //验证表单
+        form.validate();
 
-            //登录处理
-            User user = userService.login(form.getUsername(), form.getPassword());
-            request.getSession().setAttribute(Constants.USER_SESSION_KEY, user);
-
-        }catch(AppException e){
-            logger.info("登录业务异常：{}，{}",e.getResultCode(),e.getMessage());
-            if(e.getResultCode()== DailyCostResultCode.INVALID_ARGUMENT){
-                modelMap.put(Constants.MSG_KEY,"参数不合法（"+e.getMessage());
-            }
-
-            if(e.getResultCode()== DailyCostResultCode.USER_NOT_FOUND_OR_PASSWORD_ERROR){
-                modelMap.put(Constants.MSG_KEY,DailyCostResultCode.USER_NOT_FOUND_OR_PASSWORD_ERROR.getMessage());
-            }
-            return "forward:/index.jsp";
-        }
+        //登录处理
+        User user = userService.login(form.getUsername(), form.getPassword());
+        request.getSession().setAttribute(Constants.USER_SESSION_KEY, user);
 
         return "redirect:account";
     }
 
     @RequestMapping("account")
-    public String toAccount(){
+    public String toAccount() {
         return "account";
     }
 
