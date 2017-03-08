@@ -16,7 +16,6 @@ import java.util.Set;
  * Created by Lucas on 2017-03-03.
  */
 public class ValidateUtil {
-    private static Logger logger = LoggerFactory.getLogger(ValidateUtil.class);
 
     /**
      * 验证Form

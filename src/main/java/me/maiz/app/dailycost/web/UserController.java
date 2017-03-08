@@ -1,12 +1,10 @@
 package me.maiz.app.dailycost.web;
 
 import me.maiz.app.dailycost.common.Constants;
-import me.maiz.app.dailycost.common.validation.DCValidatorFactory;
 import me.maiz.app.dailycost.dal.model.User;
-import me.maiz.app.dailycost.enums.DailyCostResultCode;
-import me.maiz.app.dailycost.exception.AppException;
 import me.maiz.app.dailycost.service.UserService;
 import me.maiz.app.dailycost.web.form.LoginForm;
+import me.maiz.app.dailycost.web.form.RegForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,11 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.Validator;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Lucas on 2017-01-17.
@@ -29,17 +22,47 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 渲染注册页面
+     * @return
+     */
     @RequestMapping(value = "reg", method = RequestMethod.GET)
     public String toReg() {
         return "reg";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String login() {
-        return "index";
+    /**
+     * 注册处理
+     * @param regForm
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "reg", method = RequestMethod.POST)
+    public String reg(RegForm regForm, HttpServletRequest request){
+
+        regForm.validate();
+
+        userService.reg(regForm);
+
+        return redirectWithMessage(request,"login","注册成功");
     }
 
+    /**
+     * 登录页面
+     * @return
+     */
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login() {
+        return "/index";
+    }
 
+    /**
+     * 登录处理
+     * @param request
+     * @param form
+     * @param modelMap
+     * @return
+     */
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(HttpServletRequest request, LoginForm form, ModelMap modelMap) {
 
@@ -53,7 +76,7 @@ public class UserController extends BaseController {
         return "redirect:account";
     }
 
-    @RequestMapping("account")
+    @RequestMapping(value = "account",method = RequestMethod.GET)
     public String toAccount() {
         return "account";
     }

@@ -3,6 +3,7 @@ package me.maiz.app.dailycost.web.form;
 import me.maiz.app.dailycost.common.web.BaseForm;
 import me.maiz.app.dailycost.web.BaseController;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,11 +12,11 @@ import javax.validation.constraints.NotNull;
  */
 public class LoginForm  extends BaseForm{
 
-    @NotNull
+    @NotBlank
     @Length(max = 256,min=3)
     private String username;
 
-    @NotNull
+    @NotBlank
     @Length(max = 256,min=3)
     private String password;
 

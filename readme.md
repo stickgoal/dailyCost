@@ -32,3 +32,4 @@ v0.4 财务功能
 开发注意事项：
 
 - 约定每个请求的get方式表示页面渲染，post 方式表示提交，出现异常会重定向到get方式
+- 异常由GlobalExceptionHandler统一处理

@@ -10,5 +10,7 @@ public interface Constants {
 
     String MSG_KEY="MSG";
 
+    String ERROR_MSG_KEY="ERROR_MSG";
 
+    String DEFAULT_ERROR_PAGE = "error";
 }

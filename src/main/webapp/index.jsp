@@ -19,7 +19,7 @@
         <!-- END AJAX-DROPDOWN -->
     </div>
 
-    <span id="login-header-space"> <span class="hidden-mobile">需要新账号?</span> <a href="register.html" class="btn btn-danger">立即创建</a> </span>
+    <span id="login-header-space"> <span class="hidden-mobile">需要新账号?</span> <a href="/dailycost/reg" class="btn btn-danger">立即创建</a> </span>
 
 </header>
 
@@ -69,7 +69,10 @@
 
                         <fieldset>
                             <c:if test="${!empty MSG}">
-                            <h2 class="alert alert-warning"> ${MSG}</h2>
+                            <h2 class="alert alert-success fade in"> ${MSG}</h2>
+                            </c:if>
+                            <c:if test="${!empty ERROR_MSG}">
+                                <h2 class="alert alert-warning fade in"> ${ERROR_MSG}</h2>
                             </c:if>
                             <section>
                                 <label class="label">用户名</label>

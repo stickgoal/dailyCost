@@ -1,6 +1,7 @@
 package me.maiz.app.dailycost.components;
 
 import me.maiz.app.dailycost.common.Constants;
+import me.maiz.app.dailycost.common.WebUtil;
 import me.maiz.app.dailycost.enums.DailyCostResultCode;
 import me.maiz.app.dailycost.exception.AppException;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * 异常处理，将系统异常和业务异常区分处理
+ * 全局异常处理，将系统异常和业务异常区分处理
  * Created by Lucas on 2017-02-21.
  */
 @ControllerAdvice
@@ -24,7 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public String logException(Exception e, HttpServletRequest request){
         logger.error("系统异常被捕获",e);
-        request.setAttribute(Constants.MSG_KEY,e.getMessage());
+        request.setAttribute(Constants.ERROR_MSG_KEY,e.getMessage());
         return DEFAULT_ERROR_PAGE;
     }
 
@@ -34,24 +35,16 @@ public class GlobalExceptionHandler {
         if(e.getResultCode()== DailyCostResultCode.INVALID_ARGUMENT){
             String requestURI = request.getRequestURI();
             //使用get方法访问页面地址
-            return redirectToReqeustURI(requestURI,request,"参数不合法（" + e.getMessage() + ")");
+            return WebUtil.redirectWithMessage(Constants.ERROR_MSG_KEY,request,requestURI,"参数不合法（" + e.getMessage() + ")");
         }
 
         if(e.getResultCode()== DailyCostResultCode.USER_NOT_FOUND_OR_PASSWORD_ERROR){
-            request.setAttribute(Constants.MSG_KEY,DailyCostResultCode.USER_NOT_FOUND_OR_PASSWORD_ERROR.getMessage());
+            request.setAttribute(Constants.ERROR_MSG_KEY,DailyCostResultCode.USER_NOT_FOUND_OR_PASSWORD_ERROR.getMessage());
             return "forward:/index.jsp";
         }
         return DEFAULT_ERROR_PAGE;
     }
 
-    private String redirectToReqeustURI(String requestURI,HttpServletRequest request,String msg) {
-        try {
-            return "redirect:" + requestURI + "?" + Constants.MSG_KEY + "=" + URLEncoder.encode(msg, "UTF-8");
-        } catch (UnsupportedEncodingException e1) {
-            logger.error("系统异常，不支持的编码集",e1);
-            request.setAttribute(Constants.MSG_KEY,"系统异常，不支持的编码集");
-        }
-        return DEFAULT_ERROR_PAGE;
-    }
+
 
 }
