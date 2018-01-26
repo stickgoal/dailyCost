@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    <script src="../js/libs/jquery-2.0.2.min.js"></script>
+    <script>
+        $(function () {
+            $('[name=username]').on('change',function () {
+                $(this).parent().addClass('is-loading');
+                var clear = function(){
+                    $('[name=username]').parent().removeClass('is-loading').append($('<span class="icon is-small is-right"><i class="fas fa-check"></i></span>'));
+                }
+                setTimeout(clear.bind(this),3000);
+            })
+         });
+    </script>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <form action="">
+        <div class="columns is-mobile is-centered">
+
+            <div class="column is-one-quarter login-form">
+                <div class="columns is-mobile is-centered ">
+                    <div class="column field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="email" name="username" placeholder="您的邮箱">
+                            <span class="icon is-small is-left">
+                          <i class="fas fa-envelope"></i>
+                        </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="columns is-mobile is-centered ">
+                    <div class="column field">
+                        <p class="control has-icons-left">
+                            <input class="input" type="password" placeholder="您的密码">
+                            <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="help">还没有账号？请 <a href="/reg.html">注册</a> ，或者<a href="/forgetpassword.html">忘记密码</a>
+                    </div>
+                </div>
+                <div class="field is-grouped is-grouped-centered">
+                    <p class="control">
+                        <a class="button">
+                            重置
+                        </a>
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary">
+                            登录
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        </form>
+</section>
+</body>
+</html>
