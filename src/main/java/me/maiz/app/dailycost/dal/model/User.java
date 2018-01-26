@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by Lucas on 2017-01-17.
  */
 @Entity
-@Table(name="dc_user")
+@Table(name="dc_user",uniqueConstraints = @UniqueConstraint(name="uk_username",columnNames = "username"))
 public class User {
 
     @Id

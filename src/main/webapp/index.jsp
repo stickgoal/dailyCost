@@ -68,7 +68,7 @@
                         </header>
 
                         <fieldset>
-                            <c:if test="${!empty MSG}">
+                            <c:if test="${!empty MSG || !empty param.MSG} ">
                             <h2 class="alert alert-success fade in"> ${MSG}</h2>
                             </c:if>
                             <c:if test="${!empty ERROR_MSG}">

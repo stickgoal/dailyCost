@@ -6,3 +6,4 @@ package me.maiz.app.dailycost.filter;
  */
 public class LoginFilter  {
 }
+

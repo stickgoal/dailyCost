@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Lucas
@@ -84,21 +85,19 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">金额</label>
                                 <div class="col-md-3">
-                                    <input class="form-control " id="spinner-decimal" name="spinner-decimal"
-                                           value="7.99">
+                                    <input class="form-control " name="amount" id="spinner-decimal" name="spinner-decimal"
+                                           value="0.00">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="multiselect1">类别</label>
                                 <div class="col-md-3">
-                                    <select multiple="multiple" id="multiselect1" class="form-control custom-scroll"
+                                    <select multiple="multiple" id="multiselect1" name="category" class="form-control custom-scroll"
                                             title="选择您的花费分类">
-                                        <option>交通</option>
-                                        <option selected="selected">外出用餐</option>
-                                        <option>日用品</option>
-                                        <option>房租</option>
-                                        <option>其他固定支出</option>
+                                    <c:forEach items="categoryList" var="c">
+                                        <option value="${c.code}">${c.message}</option>
+                                    </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -106,7 +105,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">备注</label>
                                 <div class="col-md-3">
-                                    <textarea class="form-control" placeholder="备注" rows="4"></textarea>
+                                    <textarea class="form-control" name="memo" placeholder="备注" rows="4"></textarea>
                                 </div>
                             </div>
 

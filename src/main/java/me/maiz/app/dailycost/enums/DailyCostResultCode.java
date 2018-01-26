@@ -1,9 +1,11 @@
 package me.maiz.app.dailycost.enums;
 
+import me.maiz.app.dailycost.common.Messageable;
+
 /**
  * Created by Lucas on 2017-02-20.
  */
-public enum DailyCostResultCode  {
+public enum DailyCostResultCode  implements Messageable {
 
     SUCCESS("SUCCESS","处理成功"),
 

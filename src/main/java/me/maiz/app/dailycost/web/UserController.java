@@ -44,7 +44,7 @@ public class UserController extends BaseController {
 
         userService.reg(regForm);
 
-        return redirectWithMessage(request,"login","注册成功");
+        return redirectWithMessage(request,"/","注册成功");
     }
 
     /**
@@ -53,7 +53,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login() {
-        return "/index";
+        return "/";
     }
 
     /**
@@ -76,9 +76,6 @@ public class UserController extends BaseController {
         return "redirect:account";
     }
 
-    @RequestMapping(value = "account",method = RequestMethod.GET)
-    public String toAccount() {
-        return "account";
-    }
+
 
 }
